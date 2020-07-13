@@ -1,0 +1,100 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="static/style.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <header>
+                <h2>Serve up Octoprint or Luban</h2>
+                <div class="about">
+                    <a href="https://github.com/Snapmaker/Luban">[luban]</a>
+                    <a href="https://snapmaker.com">[snapmaker]</a>
+                </div>
+            </header>
+        </div>
+        <div class="row">
+            <div class="column">
+                <a href="#" onclick="javascript:window.location.port=4080">
+                    <div class="octoprint">
+                        <img src="static/logo_octoprint.png" width="249" height="200">
+                        <br>
+                        Octoprint
+                    </div>
+                </a>
+                {% if octoprint_running %}
+                    <h3>Octoprint Running
+                        <form method="post" action="/">
+                            <input type="submit" name="octoprint" value="Stop">
+                            <input type="submit" name="octoprint" value="Restart">
+                        </form>
+                    </h3>
+                {% else %}
+                    <h3>Octoprint <em>Stopped</em>
+                        <form method="post" action="/">
+                            <input type="submit" name="octoprint" value="Start">
+                        </form>
+                    </h3>
+                {% endif %}
+            </div>
+            <div class="column">
+                <a href="#" onclick="javascript:window.location.port=5080">
+                    <div class="cncjs">
+                        <img src="static/logo_cncjs.png" width="200" height="200">
+                        <br>
+                        Luban
+                    </div>
+                </a>
+                {% if cncjs_running %}
+                    <h3>Luban Running
+                        <form method="post" action="/">
+                            <input type="submit" name="cncjs" value="Stop">
+                            <input type="submit" name="cncjs" value="Restart">
+                        </form>
+                    </h3>
+                {% else %}
+                    <h3>Luban <em>Stopped</em>
+                        <form method="post" action="/">
+                            <input type="submit" name="cncjs" value="Start">
+                        </form>
+                    </h3>
+                {% endif %}
+            </div>
+        </div>
+        {% if raspap_installed %}
+        <div class="row">
+            <div class="column">
+                <a style="color: #000;" href="#" onclick="javascript:window.location.port=7080">
+                    <div class="raspap">
+                        <img src="static/logo_raspap.png" width="200" height="200">
+                        <br>
+                        RaspAP
+                    </div>
+                </a>
+                {% if raspap_running %}
+                    <h3>RaspAP Running
+                        <form method="post" action="/">
+                            <input type="submit" name="lighttpd" value="Stop">
+                            <input type="submit" name="lighttpd" value="Restart">
+                        </form>
+                    </h3>
+                {% else %}
+                    <h3>RaspAP <em>Stopped</em>
+                        <form method="post" action="/">
+                            <input type="submit" name="lighttpd" value="Start">
+                        </form>
+                    </h3>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="container">
+            <footer>
+                <a href="https://github.com/Snapmaker/Luban">[luban]</a>
+                <a href="https://snapmaker.com">[snapmaker]</a>
+            </footer>
+        </div>
+    </body>
+</html>
+

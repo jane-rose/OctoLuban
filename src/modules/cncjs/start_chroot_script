@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# Node.js install script
+#   Installs node.js in a raspberry pi image
+# Written by JeffEb3
+# GPL V3
+########
+set -x
+set -e
+
+export LC_ALL=C
+
+source /common.sh
+
+### Script ####
+
+unpack /filesystem/home/pi /home/pi pi
+unpack /filesystem/root /
+
+pushd /home/pi
+
+  if [ "$CNCJS_INCLUDE_CNCJS" == "yes" ]
+  then
+
+    # start it by default
+    npm install -g snapmaker-luban --unsafe-perm
+    update-rc.d cncjs defaults 95
+  fi
+
+  if [ "$CNCJS_EDIT_HAPROXY" == "yes" ]
+  then
+    if [ "$OCTOPI_INCLUDE_HAPROXY" == "yes" ]
+    then
+
+      # make links to the logos
+      pushd landingPage/static
+        ln -s /usr/local/lib/node_modules/snapmaker-luban/dist/Snapmakerjs/app/images/snapmaker-logo.png logo_cncjs.png
+        ln -s /home/pi/oprint/lib/python2.7/site-packages/octoprint/static/img/logo.png logo_octoprint.png
+        # ln -s /var/www/html/app/img/raspAP-logo.png logo_raspap.png
+      popd
+
+      #build virtualenv
+      pushd landingPage
+        sudo -u pi virtualenv flask
+        sudo -u pi ./flask/bin/pip install --upgrade pip
+        PIP_DEFAULT_TIMEOUT=60 sudo -u pi ./flask/bin/pip install flask
+      popd
+
+      # start it by default
+      update-rc.d landingPage defaults 95
+
+    else
+      echo "Configured to edit haproxy, but haproxy isn't installed by octopi"
+      return 1
+    fi
+  fi
+
+popd
+

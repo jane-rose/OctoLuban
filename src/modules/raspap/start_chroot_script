@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# RaspAP install script
+#   Installs RaspAP in a raspberry pi image
+# Written by JeffEb3
+# GPL V3
+########
+set -x
+set -e
+
+export LC_ALL=C
+
+source /common.sh
+
+### Script ####
+
+echo "--- RaspAP Install"
+curl -sL https://install.raspap.com | bash -s -- --yes
+
+sed -i 's@\(server.port\s*=\s*\)80@\17080@' /etc/lighttpd/lighttpd.conf
+sed -i "s@raspi-webgui@$RASPAP_HOTSPOT_NAME@" /etc/hostapd/hostapd.conf
+
+
