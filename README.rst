@@ -28,21 +28,11 @@ How to use it?
 
    You do not need to expand the filesystem, current versions of OctoPi do this automatically.
 
-OctoPrint is located at `http://octopi.local <http://octopi.local>`_ and also at `https://octopi.local <https://octopi.local>`_. Since the SSL certificate is self signed (and generated upon first boot), you will get a certificate warning at the latter location, please ignore it.
-
-To install plugins from the commandline instead of OctoPrint's built-in plugin manager, :code:`pip` may be found at :code:`/home/pi/oprint/bin/pip`.  Thus, an example install cmd may be:  :code:`/home/pi/oprint/bin/pip install <plugin-uri>`
-
-If a USB webcam or the Raspberry Pi camera is detected, MJPG-streamer will be started automatically as webcam server. OctoPrint on OctoPi ships with correctly configured stream and snapshot URLs pointing at it. If necessary, you can reach it under `http://octopi.local/webcam/?action=stream <octopi.local/webcam/?action=stream>`_ and SSL respectively, or directly on its configured port 8080: `http://octopi.local:8080/?action=stream <octopi.local:8080/?action=stream>`_.
-
-CuraEngine is installed and OctoPrint ships pre-configured with the correct path to utilize it for on-board-slicing. Just import a Cura Slicing Profile in OctoPrint's settings and start slicing directly on your Pi.
 
 Features
 --------
 
-* `OctoPrint <http://octoprint.org>`_ host software for 3d printers out of the box
-* `Raspbian <http://www.raspbian.org/>`_ tweaked for maximum performance for printing out of the box
 * `mjpg-streamer with RaspiCam support <https://github.com/jacksonliam/mjpg-streamer>`_ for live viewing of prints and timelapse video creation.
-* `CuraEngine <https://github.com/Ultimaker/CuraEngine>`_ pre-installed for slicing directly on the Raspberry Pi
 
 Developing
 ----------
@@ -78,17 +68,16 @@ You can build it by issuing the following commands::
     sudo modprobe loop
     sudo bash -x ./build_dist
 
-Also, you can just download  Luban using npm.If you're going to use sudo or root to install Luban, you need to specify the `--unsafe-perm` option to run npm as the root account.
+Also, you can just download Luban using npm. If you're going to use sudo or root to install Luban, you need to specify the `--unsafe-perm` option to run npm as the root account.
+install npm::
+    cd /usr/local/lib/
+    sudo mkdir nodejs
+    wget https://nodejs.org/dist/v10.16.0/node-v10.16.0-linux-armv7l.tar.xz
+    sudo tar -xJvf node-v10.16.0-linux-armv7l.tar.xz -C /usr/local/lib/nodejs
+    sudo ln -s /usr/local/lib/nodejs/node-v10.16.0-linux-armv7l/bin/node /usr/bin/node
+    sudo ln -s /usr/local/lib/nodejs/node-v10.16.0-linux-armv7l/bin/npm /usr/bin/npm
+    npm -v
 
-```
-cd /usr/local/lib/
-sudo mkdir nodejs
-wget https://nodejs.org/dist/v10.16.0/node-v10.16.0-linux-armv7l.tar.xz
-sudo tar -xJvf node-v10.16.0-linux-armv7l.tar.xz -C /usr/local/lib/nodejs
-sudo ln -s /usr/local/lib/nodejs/node-v10.16.0-linux-armv7l/bin/node /usr/bin/node
-sudo ln -s /usr/local/lib/nodejs/node-v10.16.0-linux-armv7l/bin/npm /usr/bin/npm
-npm -v
-
-sudo npm install --unsafe-perm -g snapmaker-luban
-luban   #start the server
-```
+install Luban::
+    sudo npm install --unsafe-perm -g snapmaker-luban
+    luban
