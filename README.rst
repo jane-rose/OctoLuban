@@ -68,7 +68,9 @@ You can build it by issuing the following commands::
     sudo modprobe loop
     sudo bash -x ./build_dist
 
-Also, you can just download Luban using npm. If you're going to use sudo or root to install Luban, you need to specify the `--unsafe-perm` option to run npm as the root account.
+Also, you can just download Luban using npm. If you're going to
+use sudo or root to install Luban, you need to specify the
+`--unsafe-perm` option to run npm as the root account::
 
     cd /usr/local/lib/
     sudo mkdir nodejs
