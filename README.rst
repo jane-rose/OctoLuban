@@ -32,7 +32,6 @@ How to use it?
 Features
 --------
 
-* `mjpg-streamer with RaspiCam support <https://github.com/jacksonliam/mjpg-streamer>`_ for live viewing of prints and timelapse video creation.
 
 Developing
 ----------
@@ -53,12 +52,13 @@ Build OctoLuban From within OctoPi / Raspbian / Debian / Ubuntu
 
 OctoLuban can be built from Debian, Ubuntu, Raspbian, or even OctoPi.
 Build requires about 2.5 GB of free space available.
+The final image will be created at the src/workspace.
 You can build it by issuing the following commands::
 
     sudo apt-get install gawk util-linux qemu-user-static git p7zip-full python3
 
     git clone https://github.com/jiantaolovebingbing/OctoLuban.git
-    cd OctoLuban/dependencies
+    mkdir OctoLuban/dependencie && cd OctoLuban/dependencies
     git clone https://github.com/guysoft/CustomPiOS.git
     git clone https://github.com/guysoft/OctoPi.git
     cd ../src/image
@@ -69,7 +69,7 @@ You can build it by issuing the following commands::
     sudo bash -x ./build_dist
 
 Also, you can just download Luban using npm. If you're going to use sudo or root to install Luban, you need to specify the `--unsafe-perm` option to run npm as the root account.
-install npm::
+
     cd /usr/local/lib/
     sudo mkdir nodejs
     wget https://nodejs.org/dist/v10.16.0/node-v10.16.0-linux-armv7l.tar.xz
@@ -77,7 +77,5 @@ install npm::
     sudo ln -s /usr/local/lib/nodejs/node-v10.16.0-linux-armv7l/bin/node /usr/bin/node
     sudo ln -s /usr/local/lib/nodejs/node-v10.16.0-linux-armv7l/bin/npm /usr/bin/npm
     npm -v
-
-install Luban::
     sudo npm install --unsafe-perm -g snapmaker-luban
     luban
