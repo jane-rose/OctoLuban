@@ -23,7 +23,7 @@ pushd /home/pi
 
     # start it by default
     npm install -g snapmaker-luban --unsafe-perm
-    update-rc.d cncjs defaults 95
+    update-rc.d luban defaults 95
   fi
 
   if [ "$CNCJS_EDIT_HAPROXY" == "yes" ]
@@ -42,7 +42,7 @@ pushd /home/pi
       pushd landingPage
         sudo -u pi virtualenv flask
         sudo -u pi ./flask/bin/pip install --upgrade pip
-        PIP_DEFAULT_TIMEOUT=60 sudo -u pi ./flask/bin/pip install flask
+        PIP_DEFAULT_TIMEOUT=180 sudo -u pi ./flask/bin/pip install flask
       popd
 
       # start it by default
@@ -55,4 +55,3 @@ pushd /home/pi
   fi
 
 popd
-
